@@ -152,6 +152,12 @@ if __name__ == '__main__':
                     d = 0
                     sazka2 = sazka2 / 2
                     vysledek2 = "prohra"
+                if rozhodnutihrace1 != 4:
+                    hrac1body = sum(hrac1)
+                    print(f"soucet hrace1 je {hrac1body}")
+                if rozhodnutihrace2 != 4:
+                    hrac2body = sum(hrac2)
+                    print(f"soucet hrace2 je {hrac2body}")
                 break
         if rozhodnuti == 1:
             hrac, a = hit(hrac, a)
@@ -165,8 +171,9 @@ if __name__ == '__main__':
             sazka = sazka/2
             vysledek = "prohra"
         hracbody = sum(hrac)
-        print(f"tvuj soucet je {hracbody}")
-        if b:
+        if rozhodnuti != 4 or rozhodnuti != 3:
+            print(f"tvuj soucet je {hracbody}")
+        if b or pojistka == 1:
             x = krupier(karty, protivnik, a)
             krupierbody = sum(x)
             print(f"krupieruv soucet je {krupierbody}")
@@ -177,6 +184,8 @@ if __name__ == '__main__':
                 if d:
                     print(f"vyhodnoceni hrace 2")
                     vysledek2 = vyhodnoceni(hrac2, krupierbody)
+            elif rozhodnuti == 4:
+                vysledek = "prohra"
             else:
                 vysledek = vyhodnoceni(hrac, krupierbody)
             if pojistka == 1:
