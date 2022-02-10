@@ -209,12 +209,16 @@ if __name__ == '__main__':
                 vydelek1 = 0
             elif vysledek1 == "prohra":
                 vydelek1 = -sazka1
+            elif vysledek1 == "vyhra Blackjack":
+                vydelek1 = 1.5 * sazka
             if vysledek2 == "vyhra":
                 vydelek2 = sazka2
             elif vysledek2 == "remiza":
                 vydelek2 = 0
             elif vysledek2 == "prohra":
                 vydelek2 = -sazka2
+            elif vysledek1 == "vyhra Blackjack":
+                vydelek1 = 1.5 * sazka
             vydelek = vydelek1 + vydelek2
             print(f"vydelal sis {vydelek}")
         else:
