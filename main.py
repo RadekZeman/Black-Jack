@@ -46,7 +46,7 @@ def double(hrac):
 
 def vyhodnoceni(hrac, krupierbody,):
     hracbody = sum(hrac)
-    if hracbody > 21:
+    while hracbody > 21:
         for i in hrac:
             if i == 11:
                 hracbody -= 10
@@ -58,7 +58,10 @@ def vyhodnoceni(hrac, krupierbody,):
         a = "vyhra"
         print(a)
     elif hracbody > krupierbody:
-        a = "vyhra"
+        if hrac == 21 and len(hrac)==2:
+            a = "vyhra Blackjack"
+        else:
+            a = "vyhra"
         print(a)
     elif hracbody == krupierbody:
         a = "remiza"
@@ -73,7 +76,7 @@ if __name__ == '__main__':
     penize = 0
     while 1:
         sazka = input("tvoje sazka:")
-        sazka = int(sazka)
+        sazka = float(sazka)
         karty = [2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10,
                  10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11]
         random.shuffle(karty)
@@ -98,7 +101,11 @@ if __name__ == '__main__':
             pojistka = int(pojistka)
             if pojistka == 1:
                 sazkapojistka = input("kolik chces vsadit:")
-                sazkapojistka = int(sazkapojistka)
+                sazkapojistka = float(sazkapojistka)
+                while sazkapojistka > sazka/2:
+                    print(f"pojistka nemuze byt vetsi nez polovina sazky")
+                    sazkapojistka = input("kolik chces vsadit:")
+                    sazkapojistka = float(sazkapojistka)
         text1 = """
                moznosti hrace:
                0 = Stand: Zůstat stát, ukončit hru.
@@ -220,6 +227,8 @@ if __name__ == '__main__':
             elif vysledek == "prohra":
                 vydelek = -sazka
                 print(f"prodelal sis {sazka}")
+            elif vysledek == "vyhra Blackjack":
+                vydelek = 1.5 * sazka
         vydelekcelkem = vydelek + vydelekpojistka
         penize += vydelekcelkem
         print(f"celkem sis vydelal {penize}")
