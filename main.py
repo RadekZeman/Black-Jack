@@ -44,13 +44,14 @@ def double(hrac):
     return hrac
 
 
-def vyhodnoceni(hrac, krupierbody,):
+def vyhodnoceni(hrac, krupierbody, krupierkarty):
     hracbody = sum(hrac)
-    while hracbody > 21:
+    if hracbody > 21:
         for i in hrac:
             if i == 11:
                 hracbody -= 10
-                break
+                if hracbody < 22:
+                    break
     if hracbody > 21:
         a = "prohra"
         print(a)
@@ -58,13 +59,16 @@ def vyhodnoceni(hrac, krupierbody,):
         a = "vyhra"
         print(a)
     elif hracbody > krupierbody:
-        if hrac == 21 and len(hrac)==2:
+        if hrac == 21 and len(hrac) == 2:
             a = "vyhra Blackjack"
         else:
             a = "vyhra"
         print(a)
     elif hracbody == krupierbody:
-        a = "remiza"
+        if hracbody == 21 and len(hrac) == 2 and krupierkarty != 2:
+            a = "vyhra Blackjack"
+        else:
+            a = "remiza"
         print(a)
     else:
         a = "prohra"
@@ -77,8 +81,8 @@ if __name__ == '__main__':
     while 1:
         sazka = input("tvoje sazka:")
         sazka = float(sazka)
-        karty = [2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10,
-                 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11]
+        karty = [2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10,
+                 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11]
         random.shuffle(karty)
         protivnik = karty[0]
         hrac = [karty[1], karty[2]]
@@ -187,14 +191,14 @@ if __name__ == '__main__':
             if rozhodnuti == 3:
                 if c:
                     print(f"vyhodnoceni hrace 1")
-                    vysledek1 = vyhodnoceni(hrac1, krupierbody)
+                    vysledek1 = vyhodnoceni(hrac1, krupierbody, x)
                 if d:
                     print(f"vyhodnoceni hrace 2")
-                    vysledek2 = vyhodnoceni(hrac2, krupierbody)
+                    vysledek2 = vyhodnoceni(hrac2, krupierbody, x)
             elif rozhodnuti == 4:
                 vysledek = "prohra"
             else:
-                vysledek = vyhodnoceni(hrac, krupierbody)
+                vysledek = vyhodnoceni(hrac, krupierbody, x)
             if pojistka == 1:
                 if krupierbody == 21:
                     vydelekpojistka = sazkapojistka
